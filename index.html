@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Buscador de cep</title>
+</head>
+<body>
+
+    <div class="logo">
+        <img src="" alt="">
+    </div>
+    
+    <h1>Buscador de CEP</h1>
+    
+        <input type="text" name=""  placeholder="Digite seu cep?" id="cepDigitado">
+        <button onclick="pesquisarCep();">Pesquisar</button>
+    
+
+    <table>
+        <tr>
+            <td>CEP: </td>
+            <td id="cep"></td>
+        </tr>
+        <tr>
+            <td>lorgradouro:</td>
+            <td id="logradouro"></td>
+        </tr>
+        <tr>
+            <td>Bairro:</td>
+            <td id="bairro"></td>
+        </tr>
+        <tr>
+            <td>Cidade:</td>
+            <td id="cidade"></td>
+        </tr>
+        <tr>
+            <td>Estado:</td>
+            <td id="estado"></td>
+        </tr>
+    </table>
+    
+
+    <script>
+        function pesquisarCep(){
+            var cepDigitado = document.querySelector("#cepDigitado").value
+            
+            var url ='https://viacep.com.br/ws/'+cepDigitado+'/json/'
+            
+            fetch(url).then((response)=>{
+                return response.json()
+            }).then((response)=>{
+                
+                document.querySelector("#cep").innerText = response.cep
+                document.querySelector("#logradouro").innerText = response.logradouro
+                document.querySelector("#bairro").innerText = response.bairro
+                document.querySelector("#cidade").innerText = response.localidade
+                document.querySelector("#estado").innerText = response.uf
+            })
+        }
+    </script>
+    
+</body>
+</html>
